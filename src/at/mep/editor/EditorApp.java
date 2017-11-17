@@ -14,6 +14,9 @@ import com.mathworks.matlab.api.editor.EditorApplicationListener;
 import com.mathworks.matlab.api.editor.EditorEvent;
 import com.mathworks.matlab.api.editor.EditorEventListener;
 import com.mathworks.mde.editor.EditorSyntaxTextPane;
+import com.mathworks.mwswing.MJMenuItem;
+import com.mathworks.mwswing.MJPopupMenu;
+import com.mathworks.widgets.SyntaxTextPane;
 import com.mathworks.widgets.editor.breakpoints.BreakpointView;
 import matlabcontrol.MatlabInvocationException;
 
@@ -97,6 +100,19 @@ public class EditorApp {
                 if (Settings.getPropertyBoolean("feature.enableClickHistory")) {
                     ClickHistory.getINSTANCE().add(editor);
                 }
+
+                MJPopupMenu cm = EditorWrapper.getEditorView(editor).getSyntaxTextPane().getContextMenu();
+                cm.addSeparator();
+
+                MJMenuItem mjMenuItem = new MJMenuItem(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("yay");
+                    }
+                });
+                mjMenuItem.setText("text");
+                mjMenuItem.setName("name");
+                cm.add(mjMenuItem);
             }
 
             @Override
